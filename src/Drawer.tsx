@@ -18,10 +18,11 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { NavLink } from 'react-router-dom';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import { Theme } from '@material-ui/core';
 
 const drawerWidth = 240;
 
-const useMenuItemStyles = makeStyles(theme => ({
+const useMenuItemStyles = makeStyles((theme: Theme) => ({
     selected: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.getContrastText(theme.palette.primary.main),
@@ -37,23 +38,20 @@ const useMenuItemStyles = makeStyles(theme => ({
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        background: theme.palette.common.white,
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
-        background: theme.palette.primary.main,
+        // background: theme.palette.common.white,
+        // color: theme.palette.primary.main,
+        color: theme.palette.common.white,
+         background: theme.palette.primary.main,
+        borderBottom: `1px solid rgba(0, 0, 0, 0.12)`,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
     },
-    //   appBarShift: {
-    //     marginLeft: drawerWidth,
-    //     width: `calc(100% - ${drawerWidth}px)`,
-    //     transition: theme.transitions.create(['width', 'margin'], {
-    //       easing: theme.transitions.easing.sharp,
-    //       duration: theme.transitions.duration.enteringScreen,
-    //     }),
-    //   },
     menuButton: {
         marginLeft: 4,
         marginRight: 36,
@@ -82,7 +80,8 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing.unit * 7.5,
     },
     list: {
-        // backgroundColor: theme.palette.primary.dark,
+        // backgroundColor: theme.palette.primary.main,
+        // color: theme.palette.common.white,
         color: theme.palette.primary.main,
     },
     toolbar: {
@@ -132,7 +131,7 @@ function MiniDrawer(props: any) {
                             //   [classes.hide]: open,
                         })}
                     >
-                        <MenuIcon />
+                        {!open ? <MenuIcon /> : <CloseIcon />}
                     </IconButton>
                     <Typography variant="h6" color="inherit" noWrap>
                         Mini variant drawer
@@ -161,7 +160,7 @@ function MiniDrawer(props: any) {
                 </div>
                 <Divider />
                 <List className={classes.list}>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    {['components', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                         // @ts-ignore
                         <ListItem className={classNames(itemClasses.root)} button component={NavLink} key={text} to={`/${text.toLowerCase()}`} activeClassName={classNames(itemClasses.selected)}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

@@ -20,7 +20,7 @@ const getCombos = (keys: string[], options: any[][]) => {
     return combos;
 }
 
-function Options({ Component, options, children }: any) {
+function Options({ Component, options, children, className = '' }: any) {
 
     const combos = getCombos(Object.keys(options), Object.values(options));
 
@@ -36,35 +36,8 @@ function Options({ Component, options, children }: any) {
             </Component>
         </div>
     ))
-    // const buttons = () => {
-    //     const allButtons = [];
-    //     for (const variant of propOpts.variant) {
-    //         for (const color of propOpts.color) {
-    //             for (const opt of propOpts.disabled) {
-    //                 allButtons.push(
-    //                     <div style={{
-    //                         padding: 15,
-    //                         display: 'inline-block'
-    //                     }}>
-    //                     <Button
-    //                         // @ts-ignore
-    //                         variant={variant}
-    //                         // @ts-ignore
-    //                         color={color}
-    //                         disabled={opt}
-    //                         key={`${variant}-${color}-${opt}`}
-    //                     >
-    //                         button
-    //                     </Button>
-    //                     </div>
-    //                 );
-    //             }
-    //         }
-    //     }
-    //     return allButtons;
-    // }
 
-    return <div>{buttons}</div>
+    return <div className={className}>{buttons}</div>
 }
 
 export default withStyles({}, { withTheme: true })(Options);
